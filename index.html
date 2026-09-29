@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Стань миллионером</title>
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <script src="/sdk.js"></script>
+</head>
+<body>
+  <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Выключить звук" aria-pressed="true">
+    <svg class="sound-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path class="sound-icon-body" d="M5 13.5h5.2L17.5 7v18l-7.3-6.5H5z"></path>
+      <path class="sound-icon-wave sound-icon-wave-one" d="M21 12.2c1.2 1 1.8 2.3 1.8 3.8s-.6 2.8-1.8 3.8"></path>
+      <path class="sound-icon-wave sound-icon-wave-two" d="M24 9c2.1 1.8 3.2 4.2 3.2 7s-1.1 5.2-3.2 7"></path>
+      <path class="sound-icon-slash" d="M7 7l18 18"></path>
+    </svg>
+  </button>
+
+  <main class="app">
+    <section class="game-panel">
+      <!-- Статичные русские тексты можно перенести в translations в game.js, когда появятся новые языки. -->
+      <div id="start-screen" class="screen active">
+        <p class="eyebrow">Интеллектуальная викторина</p>
+        <h1>Стань миллионером</h1>
+        <p class="lead">Отвечайте на вопросы по очереди. Один неверный ответ завершает игру.</p>
+
+        <dl class="stats" aria-label="Статистика игрока">
+          <div class="stat-card">
+            <dt>Лучший уровень</dt>
+            <dd id="best-level">0 из 15</dd>
+          </div>
+          <div class="stat-card">
+            <dt>Побед</dt>
+            <dd id="wins-count">0</dd>
+          </div>
+          <div class="stat-card">
+            <dt>Сыграно игр</dt>
+            <dd id="games-count">0</dd>
+          </div>
+        </dl>
+
+        <button id="start-button" class="main-button" type="button">Играть</button>
+      </div>
+
+      <div id="question-screen" class="screen">
+        <div class="question-topline">
+          <span id="level-label">Вопрос 1 из 15</span>
+          <span id="points-label">100 очков</span>
+        </div>
+
+        <h2 id="question-text">Загрузка вопроса...</h2>
+
+        <div class="hints" aria-label="Подсказки">
+          <button id="hint-fifty" class="hint-button" type="button" data-hint="fifty">50/50</button>
+          <button id="hint-audience" class="hint-button" type="button" data-hint="audience">Мнение зала</button>
+          <button id="hint-expert" class="hint-button" type="button" data-hint="expert">Совет эксперта</button>
+        </div>
+
+        <div id="hint-message" class="hint-message" aria-live="polite"></div>
+
+        <div id="answers" class="answers" aria-label="Варианты ответа"></div>
+      </div>
+
+      <div id="lose-screen" class="screen">
+        <p class="eyebrow">Игра окончена</p>
+        <h2>Ответ не подошел</h2>
+        <p id="lose-text" class="lead">Попробуйте еще раз и дойдите до финала.</p>
+        <div class="result-actions">
+          <button id="second-chance-button" class="main-button second-chance-button" type="button" hidden>
+            <span class="second-chance-main">🎬 Второй шанс</span>
+            <span class="second-chance-ad-mark">(РЕКЛАМА)</span>
+          </button>
+          <button class="main-button menu-button" type="button">В главное меню</button>
+        </div>
+      </div>
+
+      <div id="win-screen" class="screen">
+        <p class="eyebrow">Финал пройден</p>
+        <h2>Победа!</h2>
+        <p class="lead">Вы правильно ответили на все 15 вопросов.</p>
+        <button class="main-button menu-button" type="button">В главное меню</button>
+      </div>
+
+      <div id="error-screen" class="screen">
+        <p class="eyebrow">Ошибка загрузки</p>
+        <h2>Не удалось открыть вопросы</h2>
+        <p class="lead">Запустите игру через локальный сервер, как написано в README.md.</p>
+      </div>
+    </section>
+
+    <aside class="progress-panel" aria-label="Шкала уровней" aria-hidden="true">
+      <h2>Шкала уровней</h2>
+      <p id="progress-message" class="progress-message">Вопрос 1 из 15</p>
+      <ol id="level-list" class="level-list"></ol>
+      <button id="progress-next-button" class="main-button progress-next-button" type="button" hidden>Далее</button>
+    </aside>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
